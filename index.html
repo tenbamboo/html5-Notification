@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<a id="item1">点击</a>
+
+需要服务器支持
+
+<script src="jquery.js" ></script>
+
+	<script >
+	jQuery(document).ready(function($) {
+		checkPermission();
+		$("#item1").click(function(event) {
+
+			showNotifications();
+		});
+
+	});
+
+	function checkPermission() {
+		Notification.requestPermission(function (status) {
+			if (Notification.permission !== status) {
+				Notification.permission = status;
+			}
+			if (Notification.permission === 'granted') {
+				console.log("通知可用");
+				
+			} else {
+				 Notification.requestPermission();
+				console.log("通知不可用");
+			}
+		});
+	}
+	var en 
+	function showNotifications() {
+		var ms = 5000; // close notification after 15 sec
+		
+		en= new Notification('Confirm Your Payment of $500,000', { 
+			body: 'From: Nigerian Prince',
+			icon: 'menu01.png' 
+		});
+		en.onshow = function() { 
+			setTimeout(close, ms) 
+		}
+	}
+	function close(){
+		en.close();
+	}
+	
+	</script>
+
+</body>
+</html>
